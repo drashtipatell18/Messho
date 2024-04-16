@@ -26,4 +26,9 @@ Route::get('/admin/product/edit/{id}', [ProductController::class, 'productEdit']
 Route::post('/admin/product/update/{id}', [ProductController::class, 'productUpdate'])->name('update.product');
 Route::get('/admin/product/destroy/{id}',[ProductController::class,'productDestroy'])->name('destroy.product');
 
-Route::get('/setting', [SettingController::class, 'setting'])->name('setting');
+Route::get('/admin/setting', [SettingController::class, 'setting'])->name('settings');
+Route::get('/admin/setting/create',[SettingController::class,'settingCreate'])->name('create.setting');
+Route::post('/admin/setting/insert',[SettingController::class,'settingInsert'])->name('insert.setting');
+Route::get('/admin/setting/edit/{id}', [SettingController::class, 'settingEdit'])->name('edit.setting');
+Route::post('/admin/setting/update/{id}', [SettingController::class, 'settingUpdate'])->name('update.setting');
+Route::get('/admin/setting/destroy/{id}',[SettingController::class,'settingDestroy'])->name('destroy.setting');

@@ -18,7 +18,7 @@
         <div class="card">
             <div class="card-header"></div>
             <div class="card-body">
-                
+                <h2 class="text-center">Welcome!!!</h2>
             </div>
         </div>
 
