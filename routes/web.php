@@ -16,7 +16,7 @@ Auth::routes();
 // Route::post('/loginstore',[HomeController::class,'LoginStore'])->name('loginstore');
 Route::get('/logout',[HomeController::class,'Logout'])->name('logout');
 
-Route::get('/dashborad', [DashboardController::class, 'dashborad'])->name('dashborad');
+Route::get('/dashboard', [DashboardController::class, 'dashborad'])->name('dashborad');
 
 
 Route::get('/admin/product', [ProductController::class, 'products'])->name('products');
@@ -25,5 +25,10 @@ Route::post('/admin/product/insert',[ProductController::class,'productInsert'])-
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'productEdit'])->name('edit.product');
 Route::post('/admin/product/update/{id}', [ProductController::class, 'productUpdate'])->name('update.product');
 Route::get('/admin/product/destroy/{id}',[ProductController::class,'productDestroy'])->name('destroy.product');
+
+Route::post('/upload/csv', [ProductController::class, 'uploadCsv'])->name('upload.csv');
+
+
+
 
 Route::get('/setting', [SettingController::class, 'setting'])->name('setting');
