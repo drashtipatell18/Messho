@@ -68,7 +68,7 @@
                                 <i class="bi bi-person-circle"></i>Product</a>
                         </li>
                         <li>
-                            <a href="{{ route('setting') }}">
+                            <a href="{{ route('settings') }}">
                                 <i class="bi bi-people-fill"></i>Setting</a>
                         </li>
                     </ul>
@@ -97,7 +97,7 @@
                                 <i class="bi bi-person-circle"></i>Product</a>
                         </li>
                         <li>
-                            <a href="{{ route('setting') }}">
+                            <a href="{{ route('settings') }}">
                                 <i class="bi bi-people-fill"></i>Setting</a>
                         </li>
                     </ul>
