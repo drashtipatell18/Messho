@@ -20,6 +20,7 @@ class ProductController extends Controller
     }
     
     // csv upload
+
     public function import(Request $request)
     {
         $file = $request->file('file');
@@ -28,35 +29,64 @@ class ProductController extends Controller
         foreach ($fileContents as $line) {
             $data = str_getcsv($line);
     
-            // Generate unique filenames for main and sub images
-            $mainImageName = time() . '.' . $file->getClientOriginalExtension();
-            $subImageName = time(). '.' . $file->getClientOriginalExtension();
+            // Get file extensions from image URLs
+            $mainImageExtension = pathinfo($data[7], PATHINFO_EXTENSION);
+            $subImageExtension = pathinfo($data[8], PATHINFO_EXTENSION);
     
-            // Store main image
-            $mainImagePath = $file->storeAs('csvfile', $mainImageName, 'public');
+            // Generate unique filenames for main and sub images with original extensions
+            $mainImageName = time() . '_main.' . $mainImageExtension;
+            $subImageName = time() . '_sub.' . $subImageExtension;
     
-            // Store sub image
-            $subImagePath = $file->storeAs('csvfile', $subImageName, 'public');
+            // Initialize image paths to null
+            $mainImagePath = null;
+            $subImagePath = null;
     
-            // Remove 'images/' prefix from file paths
+            // Store main image if URL is valid
+           // Store main image if URL is valid
+        if (filter_var($data[7], FILTER_VALIDATE_URL)) {
+            $mainImagePath = Storage::putFileAs('csvfile', $data[7], $mainImageName, 'public');
+            // Remove 'csvfile/' prefix from the image path
             $mainImagePath = str_replace('csvfile/', '', $mainImagePath);
+        } else {
+            // Handle invalid URL error (optional)
+            Log::error("Invalid main image URL: $data[7]");
+        }
+
+        // Store sub image if URL is valid
+        if (filter_var($data[8], FILTER_VALIDATE_URL)) {
+            $subImagePath = Storage::putFileAs('csvfile', $data[8], $subImageName, 'public');
+            // Remove 'csvfile/' prefix from the image path
             $subImagePath = str_replace('csvfile/', '', $subImagePath);
+        } else {
+            // Handle invalid URL error (optional)
+            Log::error("Invalid sub image URL: $data[8]");
+        }
+
     
-            Product::create([
-                'name' => $data[0],
-                'color' => $data[1],
-                'size' => $data[2],
-                'price' => $data[3],
-                'mrp' => $data[4],
-                'category' => $data[5],
-                'description' => $data[6],
-                'main_image' => $mainImagePath,
-                'sub_image' => $subImagePath,
-            ]);
+            // Create product only if both images are successfully stored
+            if ($mainImagePath && $subImagePath) {
+                Product::create([
+                    'name' => $data[0],
+                    'color' => $data[1],
+                    'size' => $data[2],
+                    'price' => $data[3],
+                    'mrp' => $data[4],
+                    'category' => $data[5],
+                    'description' => $data[6],
+                    'main_image' => $mainImagePath,
+                    'sub_image' => $subImagePath,
+                ]);
+            } else {
+                // Handle error (optional)
+                Log::error("Failed to store one or both images for product: $data[0]");
+            }
         }
     
         return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
+    
+
+
 }
 
   
