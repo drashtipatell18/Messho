@@ -7,13 +7,15 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false, 
+    'reset' => false,    
+    'verify' => false   
+]);
 
-// Route::get('/login',[HomeController::class,'Login'])->name('login');
-// Route::post('/loginstore',[HomeController::class,'LoginStore'])->name('loginstore');
 Route::get('/logout',[HomeController::class,'Logout'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class, 'dashborad'])->name('dashborad');

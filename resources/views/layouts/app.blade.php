@@ -8,215 +8,182 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
-        @import url(https://fonts.googleapis.com/css?family=Arimo:300,400,400italic,700,700italic);
-
-        /=====================================Basic CSS====================================/ * {
-            margin: 0px;
-            padding: 0px;
-            list-style: none;
-        }
-
         body {
-            font-family: "Open Sans";
-            overflow-x: hidden !important;
-        }
-
-        html,
-        body {
-            overflow: hidden;
-        }
-
-
-        img {
-            max-width: 100%;
-        }
-
-        a {
-            text-decoration: none;
-            outline: none;
-            color: #444;
-        }
-
-        a:hover {
-            color: #444;
-        }
-
-        ul {
-            margin-bottom: 0;
-            padding-left: 0;
-        }
-
-        ol,
-        ul {
-            margin: 0px;
-            padding: 0px;
-        }
-
-        a:hover,
-        a:focus,
-        input,
-        textarea {
-            text-decoration: none;
-            outline: none;
-        }
-
-        .form-02-main {
-            background-image: url('/assets/images/bg-01.png');
+            font-family: 'Nunito', sans-serif;
+            /* background: url(public/images/background-2.jpg) no-repeat center center fixed; */
             background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        ._lk_de {
-
-            background-repeat: no-repeat;
-            background-size: cover;
-            padding: 40px 0px;
-            position: relative;
-
-        }
-
-        .form-03-main {
-            width: 500px;
-            display: block;
-            margin: 20px auto;
-            padding: 25px 50px 25px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 6px;
-            z-index: 9;
-        }
-
-        .logo {
-            display: block;
-            margin: 20px auto;
-            width: 100px;
-            height: 100px;
-        }
-
-        .form-group {
-            padding: 20px 0px;
-            display: inline-block;
-            width: 100%;
-            position: relative;
-        }
-
-        .form-group p {
-            margin: 0px;
-        }
-
-        .form-control {
-            min-height: 45px;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            border: 1px solid#8d4be1;
-        }
-
-        .checkbox {
+            margin: 0;
+            padding: 0;
+            height: 80vh;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+            align-items: center;
         }
 
-        ._btn_04 {
-            display: inline-block;
+        .log-form {
+            width: 320px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, .25);
+            padding: 20px;
+        }
+
+        .log-form h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .log-form input[type="text"],
+        .log-form input[type="email"],
+        /* Adjusted to target email input type */
+        .log-form input[type="password"] {
             width: 100%;
-            padding: 12px 0px;
-            background: #8d4be1;
-            border-radius: 20px;
-            text-align: center;
-            font-size: 16px;
-            color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
-        .rolebtn {
-            display: inline-block;
+        .log-form button[type="submit"] {
             width: 100%;
-            padding: 12px 0px;
-            border-radius: 20px;
-            text-align: center;
+            padding: 10px;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 16px;
-            color: #fff;
         }
 
-        ._btn_04 a {
-            font-size: 15px;
-            color: #fff;
+        .log-form button[type="submit"]:hover {
+            background-color: #343a40;
+            ;
         }
 
-        .nm_lk {
-            text-align: center;
+        .log-form .forgot {
+            text-align: right;
+            font-size: 14px;
         }
 
-
-
-        @media screen and (max-width: 600px) {
-            .form-03-main {
-                width: 100%;
-            }
+        .log-form .forgot a {
+            color: #343a40;
+            text-decoration: none;
         }
 
-        .py-4 {
-            padding-top: 0rem !important;
-            padding-bottom: 0rem !important;
+        .log-form .forgot a:hover {
+            color: #343a40;
+            ;
         }
 
-        @media (max-width: 768px) {
-            .form-02-main {
-                height: auto;
-                padding: 20px;
-            }
-
-            .container,
-            .row,
-            .col-md-12 {
-                padding: 0;
-                margin: 0;
-                width: 100%;
-            }
-
-            .form-03-main {
-                margin: 0 auto;
-                width: 90%;
-            }
-
-            .form-control {
-                font-size: 16px;
-            }
-
-            .button {
-                width: 100%;
-
-                padding: 10px 20px;
-         
-            }
+        .navbar-collapse {
+            background-color: #f8f9fa;
+            /* Set the background color */
+            padding: 10px;
+            /* Add some padding */
         }
 
-        @media (max-width: 600px) {
-            .form-03-main {
-                width: 100%;
+        .navbar-nav {
+            margin-left: auto;
+            /* Push the nav items to the right */
+        }
 
-            }
+        .nav-item {
+            margin-right: 15px;
+            /* Add some space between nav items */
+        }
+
+        .nav-link {
+            color: #333;
+            /* Set the default color for nav links */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        .dropdown-menu {
+            background-color: #f8f9fa;
+            /* Set the background color for dropdown menu */
+            border: none;
+            /* Remove border */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Add shadow */
+        }
+
+        .nav-link {
+            text-decoration: none;
+            /* Remove text decoration */
+        }
+
+        .dropdown-item {
+            text-decoration: none;
         }
     </style>
 </head>
 
 <body>
 
-    <main class="py-4">
-        @yield('content')
-    </main>
+    <div class="log-form">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                {{-- <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a> --}}
+                {{-- <button class="" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button> --}}
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+
+
+                    <!-- Right Side Of Navbar -->
+
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <center> <a class="nav-link "my-list href="{{ route('login') }}">{{ __('Login..') }}</a>
+                            </center>
+                        @endif
+
+                        {{-- @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif --}}
+                    @else
+                        <center>
+                            <h1> {{ Auth::user()->name }}
+                            </h1>
+                        </center>
+
+                        <center>
+                            <div class="" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </center>
+
+                    @endguest
+
+                </div>
+            </div>
+        </nav>
+
+        <main class="py-4">
+            @yield('content')
+        </main>
+    </div>
 
 </body>
 
