@@ -81,8 +81,8 @@
                                 <th><span class="nobr">Action</span></th>
                             </tr>
                         </thead>
-                        {{-- <tbody>
-                            @foreach ($products as $index => $pro)
+                        <tbody>
+                            {{-- @foreach ($products as $index => $pro)
                                 <tr class="">
                                   <td>
                                     @if ($pro->main_image)
@@ -101,8 +101,8 @@
                                             class="btn btn-danger btn-sm"onclick="return confirm('Are you sure you want to delete this ?');">Delete</a>
                                     </td>
                                 </tr>
-                            @endforeach
-                        </tbody> --}}
+                            @endforeach --}}
+                        </tbody>
                     </table>
                 </div>
             </div>
