@@ -35,7 +35,7 @@ class HomeController extends Controller
     
         // Attempt to authenticate using the user's email
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
-            return redirect()->route('calendar');
+            return redirect()->route('dashborad');
         }
        
         // If none of the attempts succeed, redirect back with an error message
