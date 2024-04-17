@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -13,80 +14,49 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     public function products(){
-        // $products = Product::all();
+        $products = Product::all();
         $columns = Schema::getColumnListing('products');
-        return view('admin.view_product',compact('columns'));
+        return view('admin.view_product',compact('products','columns'));
     }
     
     // csv upload
-    public function uploadCsv(Request $request)
+    public function import(Request $request)
     {
-        $request->validate([
-            'csv_file' => 'required|file|mimes:csv,txt'
-        ]);
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
     
-        $path = $request->file('csv_file')->getRealPath();
+        foreach ($fileContents as $line) {
+            $data = str_getcsv($line);
     
-        try {
-            $fileHandle = fopen($path, 'r');
-            if (!$fileHandle) {
-                throw new Exception("File could not be opened.");
-            }
+            // Generate unique filenames for main and sub images
+            $mainImageName = time() . '.' . $file->getClientOriginalExtension();
+            $subImageName = time(). '.' . $file->getClientOriginalExtension();
     
-            $headers = fgetcsv($fileHandle);  // Reading the header row
-         
-            while (($row = fgetcsv($fileHandle)) !== FALSE) {
-                $data = array_combine($headers, $row);
-             
-                // Add validation log to see what data is being processed
-                Log::debug('Processing row:', $data);
+            // Store main image
+            $mainImagePath = $file->storeAs('csvfile', $mainImageName, 'public');
     
-                $validator = Validator::make($data, [
-                    'name' => 'required|string|max:255',
-                    'color' => 'required|string|max:255',
-                    'size' => 'required|string|max:255',
-                    'price' => 'required|numeric',
-                    'mrp' => 'required|numeric',
-                    'category' => 'required|string|max:255',
-                    'description' => 'string|nullable',
-                    'main_image' => 'string|nullable',
-                    'sub_image' => 'string|nullable',
-                ]);
-    //    echo '<pre>';
-    //             print_r($validator);
-    //             echo '</pre>';exit;
-                if ($validator->fails()) {
-                    // Log validation errors to understand what went wrong
-                    Log::warning('Validation failed for row:', $validator->errors()->toArray());
-                    continue;
-                }
+            // Store sub image
+            $subImagePath = $file->storeAs('csvfile', $subImageName, 'public');
     
-                // Product::create($validator->validated());
-                Product::create([
-                    'name' => $validator->validated()['name'],
-                    'color' => $validator->validated()['color'],
-                    'size' => $validator->validated()['size'],
-                    'price' => $validator->validated()['price'],
-                    'mrp' => $validator->validated()['mrp'],
-                    'category' => $validator->validated()['category'],
-                    'description' => $validator->validated()['description'],
-                    'main_image' => $validator->validated()['main_image'],
-                    'sub_image' => $validator->validated()['sub_image'],
-                    // Add other fields similarly
-                ]);
-                
-            }
+            // Remove 'images/' prefix from file paths
+            $mainImagePath = str_replace('csvfile/', '', $mainImagePath);
+            $subImagePath = str_replace('csvfile/', '', $subImagePath);
     
-            fclose($fileHandle);
-        } catch (\Exception $e) {
-            Log::error('Error processing CSV file:', ['exception' => $e->getMessage()]);
-            return back()->withErrors('Error processing CSV file: ' . $e->getMessage());
+            Product::create([
+                'name' => $data[0],
+                'color' => $data[1],
+                'size' => $data[2],
+                'price' => $data[3],
+                'mrp' => $data[4],
+                'category' => $data[5],
+                'description' => $data[6],
+                'main_image' => $mainImagePath,
+                'sub_image' => $subImagePath,
+            ]);
         }
     
-        return back()->with('success', 'Products imported successfully!');
+        return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
-    
-   
 }
 
   

@@ -51,14 +51,15 @@
                                                     </ul>
                                                 </div>
                                             @endif
-                                            <form action="{{ route('upload.csv') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="csv_file">
-    <button type="submit">Upload CSV</button>
-</form>
+                                            <form action="{{ route('import') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="file" name="file" accept=".csv">
+                                                <button type="submit" class="btn btn-primary btn-sm">Import CSV</button>
+                                            </form>
 
 
-                                           
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -67,7 +68,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                         </div>
                     </div>
@@ -82,26 +82,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($products as $index => $pro)
+                            @foreach ($products as $index => $pro)
                                 <tr class="">
-                                  <td>
-                                    @if ($pro->main_image)
-                                        <img src="{{ asset('storage/main_images/' . $pro->main_image) }}"
-                                            alt="Product Main Image" width="100">
-                                    @else
-                                        No Photo Available
-                                    @endif
-                                </td>
-                                  <td>{{ $pro->name }}</td>
                                     <td>
-                                        <a href="{{ route('edit.product', $pro->id) }}"
-                                            class="btn btn-info btn-sm">Edit</a>
+                                        @if ($pro->main_image)
+                                            <img src="{{ asset('storage/csvfile/' . $pro->main_image) }}"
+                                                alt="Product Main Image" width="100">
+                                        @else
+                                            No Photo Available
+                                        @endif
+                                    </td>
+
+                                    <td>{{ $pro->name }}</td>
+                                    <td>
+                                        <a href="{{ route('edit.product', $pro->id) }}" class="btn btn-info btn-sm">Edit</a>
 
                                         <a href="{{ route('destroy.product', $pro->id) }}"
                                             class="btn btn-danger btn-sm"onclick="return confirm('Are you sure you want to delete this ?');">Delete</a>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

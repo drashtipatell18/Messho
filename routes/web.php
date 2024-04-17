@@ -25,7 +25,8 @@ Route::post('/admin/product/insert',[ProductController::class,'productInsert'])-
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'productEdit'])->name('edit.product');
 Route::post('/admin/product/update/{id}', [ProductController::class, 'productUpdate'])->name('update.product');
 Route::get('/admin/product/destroy/{id}',[ProductController::class,'productDestroy'])->name('destroy.product');
-Route::post('/upload/csv', [ProductController::class, 'uploadCsv'])->name('upload.csv');
+//Csv Import 
+Route::post('/import', [ProductController::class,'import'])->name('import');
 
 
 Route::get('/setting', [SettingController::class, 'setting'])->name('setting');
