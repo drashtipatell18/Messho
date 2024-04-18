@@ -90,11 +90,8 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror"
+                        <textarea id="description" name="description" class="form-control "
                             rows="5">{{ old('description', $products->description ?? '') }}</textarea>
-                        @error('description')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="image" id="imageLabel" class="control-label mb-1">Old Main Image</label>

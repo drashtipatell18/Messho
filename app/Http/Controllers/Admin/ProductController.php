@@ -31,7 +31,6 @@ class ProductController extends Controller
             'price' => 'required', 
             'mrp' => 'required', 
             'category' => 'required', 
-            'description' => 'required', 
         ]);
 
         $filename = '';
@@ -83,7 +82,6 @@ class ProductController extends Controller
             'price' => 'required', 
             'mrp' => 'required', 
             'category' => 'required', 
-            'description' => 'required', 
         ]);
     
         $product = Product::find($id);
