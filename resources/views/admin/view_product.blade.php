@@ -7,7 +7,7 @@
     </style>
     <div class="col-md-12 col-sm-12 ">
         <div class="card">
-            <div class="card-header">Employee List</div>
+            <div class="card-header">Product List</div>
             <div class="card-body">
                 <div class="card-title">
                     @if (session('success'))
@@ -72,6 +72,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="button-container text-right mb-2">
+                    <a href="{{ route('create.product') }}"><button type="button" class="btn btn-primary btn-sm mt-1">Add
+                            Product</button></a>
+                </div>
                 <div class="table-responsive mt-2">
                     <table class="table table-striped jambo_table bulk_action" id="table">
                         <thead>
@@ -86,7 +90,7 @@
                                 <tr class="">
                                     <td>
                                         @if ($pro->main_image)
-                                            <img src="{{ asset('storage/csvfile/' . $pro->main_image) }}"
+                                            <img src="{{ asset('images/' . $pro->main_image) }}"
                                                 alt="Product Main Image" width="100">
                                         @else
                                             No Photo Available
